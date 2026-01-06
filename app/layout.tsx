@@ -1,7 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Inter, Playfair_Display } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import Script from "next/script"
 
@@ -23,32 +22,27 @@ export const metadata: Metadata = {
     "earn money watching videos Ghana",
     "passive income Kenya",
     "best side hustle South Africa",
-    // Primary keywords
     "earn money online Africa",
     "make money streaming music",
     "digital earning platform Nigeria",
     "online earning Africa",
     "side hustle Africa",
     "passive income Africa",
-    // Country-specific
     "earn money Nigeria",
     "make money Ghana",
     "online jobs Kenya",
     "earn money South Africa",
     "digital jobs Egypt",
-    // Activity-based
     "stream music earn money",
     "watch videos earn cash",
     "affiliate marketing Africa",
     "learn and earn platform",
     "content creator platform Africa",
-    // Target audience
     "students earn money online",
     "creators monetize content Africa",
     "freelance opportunities Africa",
     "youth employment Africa",
     "digital skills training Africa",
-    // Brand terms
     "Rewaiq",
     "Rewaiq Africa",
     "Rewaiq earning platform",
@@ -132,7 +126,7 @@ export const metadata: Metadata = {
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "black-translucent",
   },
-    generator: 'v0.app'
+  generator: 'v0.app'
 }
 
 export default function RootLayout({
@@ -161,26 +155,11 @@ export default function RootLayout({
                 "query-input": "required name=search_term_string",
               },
               areaServed: [
-                {
-                  "@type": "Country",
-                  name: "Nigeria",
-                },
-                {
-                  "@type": "Country",
-                  name: "Ghana",
-                },
-                {
-                  "@type": "Country",
-                  name: "Kenya",
-                },
-                {
-                  "@type": "Country",
-                  name: "South Africa",
-                },
-                {
-                  "@type": "Continent",
-                  name: "Africa",
-                },
+                { "@type": "Country", name: "Nigeria" },
+                { "@type": "Country", name: "Ghana" },
+                { "@type": "Country", name: "Kenya" },
+                { "@type": "Country", name: "South Africa" },
+                { "@type": "Continent", name: "Africa" },
               ],
             }),
           }}
@@ -232,7 +211,7 @@ export default function RootLayout({
       </head>
       <body className={`font-sans antialiased`}>
         {children}
-        <Analytics />
+        {/* Vercel Analytics removed for Netlify compatibility */}
       </body>
     </html>
   )
