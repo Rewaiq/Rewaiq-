@@ -483,6 +483,7 @@ function Scene({ expansionProgress }: { expansionProgress: number }) {
   )
 }
 
+
 export function Rewaiq3D() {
   const [mounted, setMounted] = useState(false)
   const [expansionProgress, setExpansionProgress] = useState(0)
@@ -494,7 +495,7 @@ export function Rewaiq3D() {
     const expansionDelay = setTimeout(() => {
       let progress = 0
       const interval = setInterval(() => {
-        progress += 0.02
+        progress += 0.01 // Slower expansion - changed from 0.02 to 0.01
         if (progress >= 1) {
           progress = 1
           clearInterval(interval)
@@ -589,3 +590,6 @@ export function Rewaiq3D() {
     </div>
   )
 }
+
+// Add default export for compatibility
+export default Rewaiq3D

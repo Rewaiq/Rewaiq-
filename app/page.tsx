@@ -16,7 +16,10 @@ import { FounderVideo } from "@/components/founder-video"
 import { LaunchCTA } from "@/components/launch-cta"
 import { FAQ } from "@/components/faq"
 import { Footer } from "@/components/footer"
-import { Rewaiq3D } from "@/components/rewaiq-3d"
+
+// ✅ Correct import for your file
+import Rewaiq3D from "@/components/rewaiq-3d"
+
 import { GlitterBackground } from "@/components/glitter-background"
 import { SupportWidget } from "@/components/support-widget"
 import { ThemeToggle } from "@/components/theme-toggle"

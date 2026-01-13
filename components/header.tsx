@@ -54,6 +54,9 @@ export function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
+          <Link href="/" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            Home
+          </Link>
           <Link
             href="/about"
             className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
@@ -127,6 +130,13 @@ export function Header() {
       {mobileMenuOpen && (
         <div className="md:hidden bg-background/95 backdrop-blur-lg border-t border-white/5 animate-in slide-in-from-top">
           <nav className="container mx-auto px-6 py-6 flex flex-col gap-4">
+            <Link
+              href="/"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Home
+            </Link>
             <Link
               href="/about"
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
