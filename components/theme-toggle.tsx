@@ -20,12 +20,13 @@ export function ThemeToggle() {
     const initialTheme = savedTheme || (prefersDark ? "dark" : "light")
     setTheme(initialTheme)
 
-    // Apply theme immediately
     const html = document.documentElement
     if (initialTheme === "dark") {
       html.classList.add("dark")
+      html.style.colorScheme = "dark"
     } else {
       html.classList.remove("dark")
+      html.style.colorScheme = "light"
     }
 
     const savedPosition = localStorage.getItem("theme-toggle-position")
@@ -43,8 +44,10 @@ export function ThemeToggle() {
     const html = document.documentElement
     if (newTheme === "dark") {
       html.classList.add("dark")
+      html.style.colorScheme = "dark"
     } else {
       html.classList.remove("dark")
+      html.style.colorScheme = "light"
     }
   }
 
