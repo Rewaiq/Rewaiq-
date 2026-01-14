@@ -9,6 +9,11 @@ import { X } from "lucide-react"
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
+  const handleWaitlistClick = () => {
+    const waitlistSection = document.getElementById("waitlist")
+    waitlistSection?.scrollIntoView({ behavior: "smooth" })
+  }
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-xl border-b border-white/5">
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
@@ -96,7 +101,10 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-4">
-          <Button className="hidden md:flex bg-gradient-to-r from-[#4F7FFF] to-[#3b5bdb] hover:from-[#4070ff] hover:to-[#364fc7] text-white rounded-full px-6 font-medium shadow-lg shadow-primary/20">
+          <Button
+            onClick={handleWaitlistClick}
+            className="hidden md:flex bg-gradient-to-r from-[#4F7FFF] to-[#3b5bdb] hover:from-[#4070ff] hover:to-[#364fc7] text-white rounded-full px-6 font-medium shadow-lg shadow-primary/20"
+          >
             Join Waitlist
           </Button>
 
@@ -179,7 +187,13 @@ export function Header() {
             >
               Careers
             </Link>
-            <Button className="bg-gradient-to-r from-[#4F7FFF] to-[#3b5bdb] hover:from-[#4070ff] hover:to-[#364fc7] text-white rounded-full px-6 font-medium shadow-lg shadow-primary/20 mt-2">
+            <Button
+              onClick={() => {
+                handleWaitlistClick()
+                setMobileMenuOpen(false)
+              }}
+              className="bg-gradient-to-r from-[#4F7FFF] to-[#3b5bdb] hover:from-[#4070ff] hover:to-[#364fc7] text-white rounded-full px-6 font-medium shadow-lg shadow-primary/20 mt-2"
+            >
               Join Waitlist
             </Button>
           </nav>
