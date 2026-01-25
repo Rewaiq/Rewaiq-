@@ -7,11 +7,11 @@ import { WhatMakesUnique } from "@/components/what-makes-unique"
 import { PlatformFeatures } from "@/components/platform-features"
 import { ForCreators } from "@/components/for-creators"
 import { EarnCoins } from "@/components/earn-coins"
-import { LearningHub } from "@/components/learning-hub"
+// import { LearningHub } from "@/components/learning-hub"
 import { Giveaways } from "@/components/giveaways"
 import { WhyPerfect } from "@/components/why-perfect"
-import { WeeklyPosts } from "@/components/weekly-posts"
-import { BlogSection } from "@/components/blog-section"
+// import { WeeklyPosts } from "@/components/weekly-posts"
+// import { BlogSection } from "@/components/blog-section"
 import { FounderVideo } from "@/components/founder-video"
 import { LaunchCTA } from "@/components/launch-cta"
 import { FAQ } from "@/components/faq"
@@ -41,11 +41,11 @@ export default function Home() {
         <PlatformFeatures />
         <ForCreators />
         <EarnCoins />
-        <LearningHub />
+        {/* <LearningHub /> */}
         <Giveaways />
         <WhyPerfect />
-        <WeeklyPosts />
-        <BlogSection />
+        {/* <WeeklyPosts /> */}
+        {/* <BlogSection /> */}
         <FounderVideo />
         <LaunchCTA />
         <FAQ />

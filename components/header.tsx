@@ -16,10 +16,11 @@ export function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-xl border-b border-white/5">
-      <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+      {/* CHANGED: full width wrapper (no container centering) */}
+      <div className="w-full px-4 sm:px-6 lg:px-10 py-4 flex items-center justify-between">
+        {/* Logo now sits truly left */}
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative w-12 h-12 overflow-visible">
-            {/* Sparkle particles for New Year vibes */}
             <div className="absolute inset-0 animate-sparkle-1 pointer-events-none">
               <div className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-[#4F7FFF] rounded-full blur-[1px] shadow-[0_0_8px_#4F7FFF]" />
             </div>
@@ -30,7 +31,6 @@ export function Header() {
               <div className="absolute top-2 -left-2 w-1.5 h-1.5 bg-white rounded-full blur-[1px] shadow-[0_0_8px_white]" />
             </div>
 
-            {/* Logo with shimmer sweep */}
             <div className="relative w-12 h-12 overflow-hidden rounded-xl bg-gradient-to-br from-[#4F7FFF]/20 to-[#8B5CF6]/20 p-[1px]">
               <div className="absolute inset-0 bg-background/80 backdrop-blur-sm rounded-[11px]" />
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-shimmer" />
@@ -43,6 +43,7 @@ export function Header() {
               />
             </div>
           </div>
+
           <div className="flex flex-col gap-0 leading-tight">
             <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-[#4F7FFF] via-[#6B8FFF] to-[#8B5CF6] bg-clip-text text-transparent">
               Rewaiq
@@ -52,7 +53,9 @@ export function Header() {
                 Technologies Ltd
               </span>
               <div className="h-2 w-px bg-white/20" />
-              <span className="text-[7px] font-bold tracking-wider text-[#4F7FFF] animate-pulse-glow">RC 9137882</span>
+              <span className="text-[7px] font-bold tracking-wider text-[#4F7FFF] animate-pulse-glow">
+                RC 9137882
+              </span>
             </div>
           </div>
         </Link>
@@ -62,40 +65,28 @@ export function Header() {
           <Link href="/" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             Home
           </Link>
-          <Link
-            href="/about"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
+          <Link href="/about" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             About
           </Link>
-          <Link
-            href="#how-it-works"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
+
+          {/* IMPORTANT: Add Tech Hub link (clarify it’s support layer) */}
+          <Link href="#tech-hub" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            Tech Hub
+          </Link>
+
+          <Link href="#how-it-works" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             How It Works
           </Link>
-          <Link
-            href="#features"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
+          <Link href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             Features
           </Link>
-          <Link
-            href="#faq"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
+          <Link href="#faq" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             FAQ
           </Link>
-          <Link
-            href="/videos"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
+          <Link href="/videos" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             Videos
           </Link>
-          <Link
-            href="/careers"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
+          <Link href="/careers" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             Careers
           </Link>
         </nav>
@@ -108,6 +99,7 @@ export function Header() {
             Join Waitlist
           </Button>
 
+          {/* Hamburger already exists (good). Keep it on mobile. */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden p-2 rounded-lg hover:bg-white/5 transition-colors relative"
@@ -117,15 +109,12 @@ export function Header() {
               <X className="w-6 h-6 text-foreground" />
             ) : (
               <div className="relative w-7 h-7 flex flex-col items-center justify-center gap-[3px]">
-                {/* Top bar - R E */}
                 <div className="w-full h-[3px] rounded-full bg-gradient-to-r from-[#4F7FFF] via-[#6B8FFF] to-[#8B5CF6] flex items-center justify-center relative overflow-hidden">
                   <span className="absolute text-[6px] font-bold text-white tracking-wider">RE</span>
                 </div>
-                {/* Middle bar - WA */}
                 <div className="w-full h-[3px] rounded-full bg-gradient-to-r from-[#4F7FFF] via-[#6B8FFF] to-[#8B5CF6] flex items-center justify-center relative overflow-hidden">
                   <span className="absolute text-[6px] font-bold text-white tracking-wider">WA</span>
                 </div>
-                {/* Bottom bar - IQ */}
                 <div className="w-full h-[3px] rounded-full bg-gradient-to-r from-[#4F7FFF] via-[#6B8FFF] to-[#8B5CF6] flex items-center justify-center relative overflow-hidden">
                   <span className="absolute text-[6px] font-bold text-white tracking-wider">IQ</span>
                 </div>
@@ -135,58 +124,37 @@ export function Header() {
         </div>
       </div>
 
+      {/* Mobile menu wrapper should also be full width */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-background/95 backdrop-blur-lg border-t border-white/5 animate-in slide-in-from-top">
-          <nav className="container mx-auto px-6 py-6 flex flex-col gap-4">
-            <Link
-              href="/"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
+          <nav className="px-6 py-6 flex flex-col gap-4">
+            <Link href="/" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
               Home
             </Link>
-            <Link
-              href="/about"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
+            <Link href="/about" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
               About
             </Link>
-            <Link
-              href="#how-it-works"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
+
+            <Link href="#tech-hub" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
+              Tech Hub
+            </Link>
+
+            <Link href="#how-it-works" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
               How It Works
             </Link>
-            <Link
-              href="#features"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
+            <Link href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
               Features
             </Link>
-            <Link
-              href="#faq"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
+            <Link href="#faq" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
               FAQ
             </Link>
-            <Link
-              href="/videos"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
+            <Link href="/videos" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
               Videos
             </Link>
-            <Link
-              href="/careers"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
+            <Link href="/careers" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
               Careers
             </Link>
+
             <Button
               onClick={() => {
                 handleWaitlistClick()

@@ -1,36 +1,71 @@
-import { Play } from "lucide-react"
+"use client"
+
+import Image from "next/image"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 export function FounderVideo() {
+  const scrollToWaitlist = () => {
+    const el = document.getElementById("waitlist")
+    el?.scrollIntoView({ behavior: "smooth" })
+  }
+
   return (
     <section className="py-20 px-6 bg-muted/30">
-      <div className="container mx-auto max-w-5xl">
-        <div className="text-center mb-12">
-          <span className="text-primary font-semibold text-sm uppercase tracking-wider">From the Founder</span>
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mt-3 mb-4">A Message to Africa</h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Hear directly from our founder about the vision, mission, and future of Rewaiq
-          </p>
-        </div>
+      <div className="container mx-auto max-w-5xl text-center">
 
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-primary/20 to-purple-600/20 aspect-video max-w-4xl mx-auto group cursor-pointer">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/40 to-purple-900/40" />
+        <p className="text-primary font-semibold text-sm uppercase tracking-wider mb-3">
+          From the Founder
+        </p>
 
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="relative">
-              <div className="absolute inset-0 bg-primary/30 rounded-full blur-2xl animate-pulse" />
-              <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-white flex items-center justify-center group-hover:scale-110 transition-transform shadow-xl">
-                <Play className="w-8 h-8 md:w-10 md:h-10 text-primary ml-1" fill="currentColor" />
-              </div>
+        <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
+          A Message to Africa’s Digital Generation
+        </h2>
+
+        <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-10">
+          Rewaiq is built to help Africans earn, discover opportunities, and grow in the digital economy.
+        </p>
+
+        {/* Founder Card */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-white/5 border border-white/10 rounded-2xl p-6 max-w-3xl mx-auto backdrop-blur">
+
+          <div className="flex items-center gap-4">
+            {/* Your Image */}
+            <div className="w-16 h-16 rounded-full overflow-hidden border border-white/20">
+              <Image
+                src="/images/ubani-founder.jpg"
+                alt="Ubani Solomon Ikedi"
+                width={64}
+                height={64}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            <div className="text-left">
+              <p className="font-semibold text-foreground text-lg">
+                Ubani Solomon Ikedi
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Founder, Rewaiq Technologies Ltd
+              </p>
             </div>
           </div>
 
-          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 bg-gradient-to-t from-black/80 to-transparent">
-            <h3 className="text-white font-bold text-xl md:text-2xl mb-2">Why We Built Rewaiq</h3>
-            <p className="text-white/80 text-sm md:text-base">
-              Empowering every African to earn, create, and thrive in the digital economy
-            </p>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="https://www.linkedin.com/in/ubani-solomon-ikedi-438508256"
+              target="_blank"
+              className="text-primary text-sm hover:underline"
+            >
+              View LinkedIn
+            </Link>
+
+            <Button onClick={scrollToWaitlist} className="rounded-full">
+              Join Waitlist
+            </Button>
           </div>
         </div>
+
       </div>
     </section>
   )

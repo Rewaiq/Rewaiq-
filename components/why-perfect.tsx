@@ -1,34 +1,34 @@
 export function WhyPerfect() {
   const features = [
     {
-      title: "You Get Discovered Faster",
+      title: "Discover Content That Matters",
       description:
-        'Because people browse by category, your work is shown to the exact audience that cares about your type of creativity not mixed into random "general feed".',
+        "Users explore content by category and interest, so creators reach real fans who care—not random algorithm feeds.",
     },
     {
-      title: "You Don't Need A Big Follower Base",
+      title: "Earn From Real Engagement",
       description:
-        "Visibility doesn't depend on popularity. A new creator can still rank and get eyes on their content. Reach is based on your content, not your popularity",
+        "Users earn coins by streaming music, watching videos, engaging with brands, and completing verified digital tasks.",
     },
     {
-      title: "Your Work Is Presented Professionally",
+      title: "Creators Get Real Fans, Not Bots",
       description:
-        "The platform layout is clean so if someone views your page, it looks like a portfolio, not like a social media timeline. Your page looks like a real portfolio not like a cluttered personal feed.",
+        "Artists and creators gain authentic listeners, followers, and engagement backed by transparent analytics.",
     },
     {
-      title: "Less Competition For Attention",
+      title: "Brands Get Active Digital Users",
       description:
-        'Because people browse by category, your work is shown to the exact audience that cares about your type of creativity not mixed into random "general feed".',
+        "Businesses launch campaigns, gain visibility, and convert attention into measurable engagement and leads.",
     },
     {
-      title: "One Place To Organise All Your Work",
+      title: "All-In-One Digital Ecosystem",
       description:
-        "Instead of posting 1 thing on IG, another on TikTok, another on Behance you can keep everything in one clean, central space.",
+        "Learning, earning, creator discovery, and brand engagement—built into one unified African digital platform.",
     },
     {
-      title: "You Can Attract Potential Clients",
+      title: "Tech Hub for Training & Access",
       description:
-        "The goal isn't to chase vanity metrics. It's to connect you with people who might want to partner, buy, hire, or commission.",
+        "Our physical Tech Hub supports onboarding, digital skills training, and access for users with limited devices or internet.",
     },
   ]
 
@@ -36,11 +36,11 @@ export function WhyPerfect() {
     <section id="features" className="py-24 px-6 bg-[#0a0a1a]">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Why We Are Perfect For Creators</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+            Why Rewaiq Is Different
+          </h2>
           <p className="text-white/60 max-w-3xl mx-auto text-base md:text-lg leading-relaxed">
-            Our Platform Is Being Built To Give Creatives Clearer Visibility, Easier Publishing, And A Cleaner Space To
-            Express Their Work. We Focus On Discovery, Not Noise So Your Content Can Actually Stand Out And Be Seen By
-            The Right Audience.
+            Rewaiq combines discovery, engagement, and earning into one platform — supported by a physical Tech Hub for training and onboarding.
           </p>
         </div>
 
