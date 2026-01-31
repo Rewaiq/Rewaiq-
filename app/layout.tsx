@@ -209,10 +209,11 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`font-sans antialiased`}>
-        {children}
-        {/* Vercel Analytics removed for Netlify compatibility */}
-      </body>
+      <body className="font-sans antialiased">
+  <div className="min-h-dvh transition-opacity duration-200 ease-out">
+    {children}
+  </div>
+</body>
     </html>
   )
 }

@@ -135,8 +135,8 @@ export function Header() {
               About
             </Link>
 
-            <Link href="#tech-hub" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
-              Tech Hub
+            <Link href="/hub" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>
+              Rewaiq Hub
             </Link>
 
             <Link href="#how-it-works" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>

@@ -1,26 +1,37 @@
-datasource db {
-  provider = "sqlite"
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum WaitlistRole {
+  USER
+  CREATOR
+  ARTIST
+  BUSINESS
+}
 
 model WaitlistSignup {
   id            String   @id @default(cuid())
   email         String   @unique
   fullName      String?
   phone         String?
-  roles         String   // stored like: "user,creator,artist,brand"
-  referralCode  String   @unique
-  referredBy    String?  // referralCode of inviter
-  referralCount Int      @default(0)
+  country       String?
+  roles         WaitlistRole[]
   heardFrom     String?
   consent       Boolean  @default(false)
+
+  referralCode  String   @unique
+  referredById  String?
+  referredBy    WaitlistSignup? @relation("Referrals", fields: [referredById], references: [id])
+  referrals     WaitlistSignup[] @relation("Referrals")
+
   createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   @@index([referralCode])
-  @@index([referredBy])
-  @@index([createdAt])
+  @@index([referredById])
 }

@@ -1,7 +1,20 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+/* Removed unsupported @custom-variant (causes "Unknown at rule" error).
+   Define custom Tailwind variants in tailwind.config.js (or via a PostCSS/Tailwind plugin) instead, for example:
+
+   // tailwind.config.js
+   // const plugin = require('tailwindcss/plugin');
+   // module.exports = {
+   //   plugins: [
+   //     plugin(function({ addVariant }) {
+   //       addVariant('dark', '&:is(.dark *)');
+   //     })
+   //   ]
+   // };
+
+*/
 
 /* Updated to match Figma design - deep navy with bright blue primary */
 :root {
@@ -280,3 +293,5 @@
 .animate-shimmer {
   animation: shimmer 2.4s linear infinite;
 }
+html{color-scheme: dark;}
+html.light{color-scheme: light;}
