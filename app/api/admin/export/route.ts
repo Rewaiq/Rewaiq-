@@ -7,7 +7,7 @@ export const revalidate = 0
 
 export async function GET() {
   try {
-    assertAdminOrThrow()
+    await assertAdminOrThrow()
 
     const rows = await sql`
       SELECT

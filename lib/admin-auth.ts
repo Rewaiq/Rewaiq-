@@ -1,4 +1,5 @@
 import crypto from "crypto"
+import { cookies } from "next/headers"
 
 const SECRET = process.env.ADMIN_SECRET || "dev_secret_change_me"
 
@@ -32,4 +33,15 @@ export function getAllowlist() {
     .split(",")
     .map((s) => s.trim().toLowerCase())
     .filter(Boolean)
+}
+
+export async function assertAdminOrThrow() {
+  const cookieStore = await cookies()
+  const token = cookieStore.get("rewaiq_admin")?.value
+  const expected = process.env.ADMIN_TOKEN
+
+  if (!token || !expected || token !== expected) {
+    const err = new Error("UNAUTHORIZED")
+    throw err
+  }
 }
