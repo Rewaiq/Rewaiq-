@@ -1,6 +1,5 @@
 import { cookies } from "next/headers"
 import crypto from "crypto"
-import { cookies } from "next/headers"
 
 const COOKIE_NAME = "rewaiq_admin"
 
@@ -52,13 +51,21 @@ export function getAdminFromCookie(): { email: string; ts: number } | null {
 }
 
 /**
- * Allowlist check
+ * Get the admin allowlist
  */
-export function isAllowlistedEmail(email: string) {
-  const list = (process.env.ADMIN_ALLOWLIST || "")
+export function getAllowlist(): string[] {
+  return (process.env.ADMIN_ALLOWLIST || "")
     .split(",")
     .map((s) => s.trim().toLowerCase())
     .filter(Boolean)
+}
+
+/**
+ * Allowlist check
+ */
+export function isAllowlistedEmail(email: string): boolean {
+  const list = getAllowlist()
+  return list.length === 0 || list.includes(email.toLowerCase())
 }
 
 export async function assertAdminOrThrow() {
