@@ -6,8 +6,7 @@ export const dynamic = "force-dynamic"
 
 export async function GET() {
   try {
-    // ✅ block non-admins
-    assertAdminOrThrow()
+    await assertAdminOrThrow()
 
     // export all waitlist rows (edit columns as you like)
     const rows = await sql`

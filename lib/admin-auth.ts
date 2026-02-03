@@ -1,5 +1,6 @@
 import { cookies } from "next/headers"
 import crypto from "crypto"
+import { cookies } from "next/headers"
 
 const COOKIE_NAME = "rewaiq_admin"
 
@@ -58,21 +59,15 @@ export function isAllowlistedEmail(email: string) {
     .split(",")
     .map((s) => s.trim().toLowerCase())
     .filter(Boolean)
-
-  return list.includes(email.toLowerCase())
 }
 
-/**
- * ✅ This is what your build is complaining is missing.
- * Use this inside any /api/admin/* route.
- */
-export function assertAdminOrThrow() {
-  const admin = getAdminFromCookie()
-  if (!admin) throw new Error("UNAUTHORIZED")
+export async function assertAdminOrThrow() {
+  const cookieStore = await cookies()
+  const token = cookieStore.get("rewaiq_admin")?.value
+  const expected = process.env.ADMIN_TOKEN
 
-  if (!isAllowlistedEmail(admin.email)) throw new Error("FORBIDDEN")
-
-  return admin
+  if (!token || !expected || token !== expected) {
+    const err = new Error("UNAUTHORIZED")
+    throw err
+  }
 }
-
-export const ADMIN_COOKIE_NAME = COOKIE_NAME
