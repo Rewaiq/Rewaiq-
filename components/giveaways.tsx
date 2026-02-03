@@ -39,7 +39,7 @@ export function Giveaways() {
           <p className="text-cyan-400 font-medium mb-4">FOUNDING MEMBER REWARDS</p>
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-5">Join Early. Unlock Rewards.</h2>
           <p className="text-white/60 max-w-3xl mx-auto text-base md:text-lg leading-relaxed">
-            Early supporters get perks at launch — designed to reward consistency, not hype.
+            Early supporters get perks at launch, designed to reward consistency, not hype.
           </p>
         </div>
 
@@ -67,7 +67,7 @@ export function Giveaways() {
           </Button>
 
           <p className="text-xs text-white/45 mt-3">
-            Rewards activate after launch. Clear rules + verified tasks — no fake promises.
+            Rewards activate after launch. Clear rules + verified tasks, no fake promises.
           </p>
         </div>
       </div>

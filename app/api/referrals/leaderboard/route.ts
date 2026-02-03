@@ -7,7 +7,7 @@ export async function GET() {
       select full_name, referral_code, invite_count
       from waitlist_leaderboard
       order by invite_count desc
-      limit 10
+      limit 5;
     `
 
     return NextResponse.json(rows)

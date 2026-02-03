@@ -3,7 +3,7 @@ export function WhyPerfect() {
     {
       title: "Discover Content That Matters",
       description:
-        "Users explore content by category and interest, so creators reach real fans who care—not random algorithm feeds.",
+        "Users explore content by category and interest, so creators reach real fans who care-not random algorithm feeds.",
     },
     {
       title: "Earn From Real Engagement",
@@ -23,7 +23,7 @@ export function WhyPerfect() {
     {
       title: "All-In-One Digital Ecosystem",
       description:
-        "Learning, earning, creator discovery, and brand engagement—built into one unified African digital platform.",
+        "Learning, earning, creator discovery, and brand engagement, built into one unified African digital platform.",
     },
     {
       title: "Tech Hub for Training & Access",
@@ -40,7 +40,7 @@ export function WhyPerfect() {
             Why Rewaiq Is Different
           </h2>
           <p className="text-white/60 max-w-3xl mx-auto text-base md:text-lg leading-relaxed">
-            Rewaiq combines discovery, engagement, and earning into one platform — supported by a physical Tech Hub for training and onboarding.
+            Rewaiq combines discovery, engagement, and earning into one platform, supported by a physical Tech Hub for training and onboarding.
           </p>
         </div>
 

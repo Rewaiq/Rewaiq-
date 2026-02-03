@@ -17,7 +17,7 @@ export function WhatMakesUnique() {
             What Makes <span className="text-[#4F7FFF]">Rewaiq</span> Unique
           </h2>
           <p className="text-white/60 text-base md:text-lg max-w-3xl mx-auto">
-            Verified engagement that benefits users, creators, and brands — supported by a physical Tech Hub.
+            Verified engagement that benefits users, creators, and brands. Supported by a physical Tech Hub.
           </p>
         </div>
 
@@ -32,7 +32,7 @@ export function WhatMakesUnique() {
               </div>
 
               <h3 className="text-xl md:text-2xl font-bold mb-2 text-white">Creators & Artists</h3>
-              <p className="text-white/60 mb-4">Get real engagement — not bots.</p>
+              <p className="text-white/60 mb-4">Get real engagement, not bots.</p>
 
               <ul className="space-y-2 text-sm md:text-base text-white/80">
                 <li className="flex items-start gap-2">
@@ -124,7 +124,7 @@ export function WhatMakesUnique() {
               Users earn rewards from <span className="text-white font-semibold">verified music discovery</span> and engagement.
             </p>
             <p className="text-center text-xs text-white/45 mb-8">
-              Rewaiq is <span className="text-white/70 font-semibold">not</span> a streaming app — we reward verified engagement that supports creators across platforms.
+              Rewaiq is <span className="text-white/70 font-semibold">not</span> a streaming app, we reward verified engagement that supports creators across platforms.
             </p>
 
             <div className="grid md:grid-cols-2 gap-6">
@@ -185,7 +185,7 @@ export function WhatMakesUnique() {
         <div className="mt-10 max-w-4xl mx-auto text-center text-white/60 text-sm">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5">
             <Building2 className="w-4 h-4" />
-            Tech Hub supports onboarding & skills training — earning happens online on the platform.
+            Rewaiq Hub supports onboarding & skills training, earning happens online on the platform.
           </span>
         </div>
       </div>

@@ -45,7 +45,7 @@ export function PlatformFeatures() {
     },
     {
       icon: BookOpen,
-      title: "Skills & Training (Tech Hub)",
+      title: "Skills & Training (Rewaiq Hub)",
       description: "Learn digital skills (web dev, design, marketing, etc.) with onboarding support.",
       color: "from-blue-500/50 to-cyan-500/30",
       glow: "group-hover:shadow-blue-500/20",
@@ -90,7 +90,7 @@ export function PlatformFeatures() {
           </h2>
 
           <p className="text-white/60 max-w-3xl mx-auto text-base md:text-lg leading-relaxed">
-            One ecosystem for creators, brands, and users — powered by verified tasks and transparent rewards.
+            One ecosystem for creators, brands, and users, powered by verified tasks and transparent rewards.
           </p>
 
           {/* CTA */}

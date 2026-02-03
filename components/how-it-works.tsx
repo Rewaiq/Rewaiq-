@@ -9,13 +9,13 @@ export function HowItWorks() {
       icon: Search,
       title: "Discover",
       description:
-        "Find verified campaigns and tasks from creators (music/video), brands, and the Rewaiq community — matched to your interests.",
+        "Find verified campaigns and tasks from creators (music/video), brands, and the Rewaiq community. Matched to your interests.",
     },
     {
       icon: MousePointerClick,
       title: "Engage",
       description:
-        "Do simple actions like stream/listen, watch, follow, like, comment, share, or join creator/brand challenges — with clear rules and verification.",
+        "Do simple actions like stream/listen, watch, follow, like, comment, share, or join creator/brand challenges, with clear rules and verification.",
     },
     {
       icon: Coins,
@@ -40,7 +40,7 @@ export function HowItWorks() {
         <div className="text-center mb-14">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-5">How Rewaiq Works</h2>
           <p className="text-white/60 max-w-3xl mx-auto text-base md:text-lg leading-relaxed">
-            Rewaiq helps African users discover opportunities, complete verified engagement, and earn rewards — while
+            Rewaiq helps African users discover opportunities, complete verified engagement, and earn rewards. While
             creators and brands get real audience action (not bots).
           </p>
         </div>
@@ -65,7 +65,7 @@ export function HowItWorks() {
                 {/* Micro trust line */}
                 {index === 1 && (
                   <p className="text-xs text-white/40 mt-4">
-                    No exaggerated claims — tasks have rules, and rewards are based on verified completion.
+                    No exaggerated claims. Tasks have rules, and rewards are based on verified completion.
                   </p>
                 )}
               </div>
@@ -77,7 +77,7 @@ export function HowItWorks() {
         <div className="text-center mb-6">
           <h3 className="text-2xl font-bold text-white mb-2">See Rewaiq In Action</h3>
           <p className="text-white/60">
-            Quick walkthrough of the platform experience (preview — MVP in progress).
+            Quick walkthrough of the platform experience (Preview, MVP in progress).
           </p>
         </div>
 

@@ -591,5 +591,4 @@ export function Rewaiq3D() {
   )
 }
 
-// Add default export for compatibility
 export default Rewaiq3D

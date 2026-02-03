@@ -55,7 +55,7 @@ export function Hero() {
 
         {/* Subtext */}
         <p className="text-base md:text-lg text-white/70 max-w-2xl mx-auto mb-8 leading-relaxed">
-          Rewaiq connects African youth, creators, and brands through verified digital engagement — turning
+          Rewaiq connects African youth, creators, and brands through verified digital engagement. Turning
           discovery into rewards you can redeem or reinvest.
         </p>
 
@@ -75,7 +75,7 @@ export function Hero() {
         {/* Hub clarification */}
         <p className="text-sm text-white/55 max-w-2xl mx-auto mb-8">
           The Rewaiq Tech Hub supports onboarding, access, and skills training (web development, design,
-          digital marketing, etc.) — but earning happens on the platform.
+          digital marketing, etc.). But earning happens on the platform.
         </p>
 
         {/* CTA row */}
@@ -89,7 +89,7 @@ export function Hero() {
           </Button>
 
           <p className="text-xs text-white/45">
-            No “get-rich-quick” promises — clear rules, verified engagement, transparent rewards.
+            No “get-rich-quick” promises. Clear rules, verified engagement, transparent rewards.
           </p>
         </div>
 
@@ -142,10 +142,6 @@ export function Hero() {
               </div>
             </div>
           </div>
-
-          <p className="text-[11px] text-white/45 mt-3">
-            Note: Referral tracking will be enabled at launch (this is a preview).
-          </p>
         </div>
       </div>
     </section>

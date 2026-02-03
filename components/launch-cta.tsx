@@ -1,9 +1,9 @@
 "use client"
 
 import type React from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useEffect, useMemo, useState } from "react"
 import Leaderboard from "@/components/leaderboard"
 import { AFRICAN_COUNTRIES } from "@/lib/africa"
 
@@ -28,7 +28,7 @@ const HEARD_FROM_OPTIONS = [
 ]
 
 export function LaunchCTA() {
-  // ✅ GEO states (as you requested)
+  // ✅ GEO states
   const [isAfricaUser, setIsAfricaUser] = useState<boolean | null>(null)
   const [geoDetectedCountry, setGeoDetectedCountry] = useState<string | null>(null)
   const [overrideCountry, setOverrideCountry] = useState(false)
@@ -36,8 +36,10 @@ export function LaunchCTA() {
   const [email, setEmail] = useState("")
   const [fullName, setFullName] = useState("")
   const [phone, setPhone] = useState("")
-  const [country, setCountry] = useState<string>(AFRICAN_COUNTRIES[0] || "Nigeria")
-  const [heardFrom, setHeardFrom] = useState("WhatsApp")
+  // ✅ force user to choose; geo can still auto-fill
+  const [country, setCountry] = useState<string>("")
+  // ✅ force user to choose (no default WhatsApp)
+  const [heardFrom, setHeardFrom] = useState<string>("")
   const [consent, setConsent] = useState(false)
 
   const [roles, setRoles] = useState<string[]>(["user"])
@@ -57,11 +59,24 @@ export function LaunchCTA() {
   const [referralCode, setReferralCode] = useState<string | null>(null)
   const [inviteCount, setInviteCount] = useState<number>(0)
 
-  // read ?ref=
+  /**
+   * ✅ STORE REFERRAL AUTOMATICALLY (Option A)
+   * - Reads ?ref= from URL
+   * - Stores it in localStorage so user doesn't lose it if they navigate around
+   * - If there's no ?ref=, it re-uses the saved one (if any)
+   */
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     const ref = params.get("ref")
-    if (ref) setReferredByFromUrl(ref.trim().toUpperCase())
+
+    if (ref) {
+      const cleanRef = ref.trim().toUpperCase()
+      localStorage.setItem("rewaiq_referral", cleanRef)
+      setReferredByFromUrl(cleanRef)
+    } else {
+      const savedRef = localStorage.getItem("rewaiq_referral")
+      if (savedRef) setReferredByFromUrl(savedRef)
+    }
   }, [])
 
   // ✅ GEO detection (best-effort) using /api/geo
@@ -87,14 +102,15 @@ export function LaunchCTA() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [overrideCountry])
 
-  // if outsideAfrica toggled, lock country
+  // If outsideAfrica toggled, lock country
   useEffect(() => {
     if (outsideAfrica) {
       setCountry("Outside Africa")
     } else {
       // if we have detected and user didn't override, use it
       if (geoDetectedCountry && !overrideCountry) setCountry(geoDetectedCountry)
-      else if (!AFRICAN_COUNTRIES.includes(country as any)) setCountry("Nigeria")
+      // if user is not overriding and we still have empty, keep empty (force choice)
+      if (!geoDetectedCountry && !overrideCountry && country === "Outside Africa") setCountry("")
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [outsideAfrica])
@@ -144,7 +160,7 @@ export function LaunchCTA() {
     setLoading(true)
     setMessage(null)
 
-    // required checks (client-side)
+    // required checks
     if (!fullName.trim()) {
       setLoading(false)
       setMessage("Full name is required.")
@@ -153,6 +169,11 @@ export function LaunchCTA() {
     if (!phone.trim()) {
       setLoading(false)
       setMessage("Phone number is required.")
+      return
+    }
+    if (!heardFrom.trim()) {
+      setLoading(false)
+      setMessage("Please select where you heard about Rewaiq.")
       return
     }
     if (!consent) {
@@ -213,17 +234,8 @@ export function LaunchCTA() {
       <div className="container mx-auto max-w-5xl relative">
         <div className="relative rounded-[2.8rem] p-[1px] bg-gradient-to-r from-[#4F7FFF]/60 via-[#8B5CF6]/40 to-[#22d3ee]/40">
           <div className="relative rounded-[2.75rem] bg-gradient-to-b from-white/8 to-white/5 backdrop-blur-xl border border-white/10 px-6 sm:px-10 py-12 md:py-16 text-center overflow-hidden">
-
-            {/* ✅ Smart Banner */}
-            {isAfricaUser === false && (
-              <div className="mb-6 p-4 rounded-2xl bg-yellow-500/10 border border-yellow-500/30 text-yellow-200 text-sm">
-                🌍 Looks like you’re outside Africa.
-                <br /><br />
-                We’re expanding globally — join our early expansion list and we’ll notify you once Rewaiq launches in your region.
-              </div>
-            )}
-
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white/5 text-white/80 text-sm mb-6">
+          
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white/5 text-white/80 text-sm mb-6">
               <span className="h-2 w-2 rounded-full bg-[#4F7FFF] shadow-[0_0_14px_rgba(79,127,255,0.7)]" />
               Waitlist is live • Discover • Engage • Earn
             </div>
@@ -235,7 +247,7 @@ export function LaunchCTA() {
               students, users, brands & artists.
               {referredByFromUrl ? (
                 <span className="block text-sm mt-2 text-white/70">
-                  You opened a referral link: <b className="text-white">{referredByFromUrl}</b>
+                  Referral detected: <b className="text-white">{referredByFromUrl}</b>
                 </span>
               ) : null}
             </p>
@@ -275,28 +287,9 @@ export function LaunchCTA() {
                   onChange={(e) => setOutsideAfrica(e.target.checked)}
                   className="mt-1 accent-white"
                 />
-                <span>
-                  I’m outside Africa — send me newsletter updates only (we’ll notify you when we expand).
-                </span>
+                <span>I’m outside Africa. Send me newsletter updates only (we’ll notify you when we expand).</span>
               </label>
             </div>
-
-            {/* country override toggle */}
-            {!outsideAfrica && (
-              <div className="max-w-xl mx-auto mb-4 text-left">
-                <label className="flex items-start gap-2 text-left text-white/75 text-xs px-2">
-                  <input
-                    type="checkbox"
-                    checked={overrideCountry}
-                    onChange={(e) => setOverrideCountry(e.target.checked)}
-                    className="mt-1 accent-white"
-                  />
-                  <span>
-                    My country is not correct (detected: <b className="text-white">{geoDetectedCountry || "unknown"}</b>) — let me choose manually.
-                  </span>
-                </label>
-              </div>
-            )}
 
             {/* form */}
             <form onSubmit={handleSubmit} className="max-w-xl mx-auto grid gap-3">
@@ -316,23 +309,34 @@ export function LaunchCTA() {
                 className="bg-white text-gray-900 rounded-full px-6 py-6 text-base border-none"
               />
 
-              {/* Africa-only dropdown */}
+              {/* Country dropdown */}
               <select
                 value={country}
-                onChange={(e) => setCountry(e.target.value)}
+                onChange={(e) => {
+                  setOverrideCountry(true)
+                  setCountry(e.target.value)
+                }}
                 required={!outsideAfrica}
                 disabled={outsideAfrica || (!overrideCountry && Boolean(geoDetectedCountry))}
                 className={[
-                  "bg-white text-gray-900 rounded-full px-6 py-4 text-base border-none w-full",
+                  "bg-white text-gray-900 rounded-full w-full border-none",
+                  "px-6 py-4 md:py-5 text-base",
+                  "leading-tight",
+                  "appearance-none",
                   outsideAfrica ? "opacity-60 cursor-not-allowed" : "",
                 ].join(" ")}
               >
                 {!outsideAfrica ? (
-                  AFRICAN_COUNTRIES.map((c) => (
-                    <option key={c} value={c}>
-                      {c}
+                  <>
+                    <option value="" disabled>
+                      Select your country *
                     </option>
-                  ))
+                    {AFRICAN_COUNTRIES.map((c) => (
+                      <option key={c} value={c}>
+                        {c}
+                      </option>
+                    ))}
+                  </>
                 ) : (
                   <option value="Outside Africa">Outside Africa</option>
                 )}
@@ -343,8 +347,16 @@ export function LaunchCTA() {
                 value={heardFrom}
                 onChange={(e) => setHeardFrom(e.target.value)}
                 required
-                className="bg-white text-gray-900 rounded-full px-6 py-4 text-base border-none"
+                className={[
+                  "bg-white text-gray-900 rounded-full w-full border-none",
+                  "px-6 py-4 md:py-5 text-base",
+                  "leading-tight",
+                  "appearance-none",
+                ].join(" ")}
               >
+                <option value="" disabled>
+                  Where did you hear about Rewaiq? *
+                </option>
                 {HEARD_FROM_OPTIONS.map((opt) => (
                   <option key={opt} value={opt}>
                     {opt}
@@ -408,7 +420,11 @@ export function LaunchCTA() {
                     <div className="w-full bg-white/10 text-white/90 rounded-full px-4 py-3 text-sm break-all border border-white/10">
                       {referralLink}
                     </div>
-                    <Button type="button" onClick={copyLink} className="rounded-full bg-white text-[#3b5bdb] hover:bg-white/90">
+                    <Button
+                      type="button"
+                      onClick={copyLink}
+                      className="rounded-full bg-white text-[#3b5bdb] hover:bg-white/90"
+                    >
                       Copy
                     </Button>
                   </div>
@@ -433,9 +449,7 @@ export function LaunchCTA() {
                     </Button>
                   </div>
 
-                  <p className="text-xs text-white/65 mt-4">
-                    Share on WhatsApp/IG. We track invites automatically via referral code.
-                  </p>
+                  <p className="text-xs text-white/65 mt-4">Share on WhatsApp/IG. We track invites automatically via referral code.</p>
                 </div>
               </div>
             ) : null}
@@ -443,11 +457,10 @@ export function LaunchCTA() {
             {/* ✅ Leaderboard */}
             <Leaderboard />
 
-            {/* Blinking Follow links */}
+            {/* Follow links */}
             <div className="mt-10 flex flex-col items-center gap-2">
               <p className="text-xs text-white/60">
-                <span className="inline-block animate-pulse text-white/90 font-semibold">Follow us</span>{" "}
-                on social media:
+                <span className="inline-block animate-pulse text-white/90 font-semibold">Follow us</span> on social media:
               </p>
               <div className="flex flex-wrap justify-center gap-3 text-sm">
                 <a
@@ -497,7 +510,6 @@ export function LaunchCTA() {
               </a>
               .
             </div>
-
           </div>
         </div>
       </div>

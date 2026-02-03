@@ -20,7 +20,7 @@ export default function AboutPage() {
               <h2 className="text-3xl font-bold mb-4 text-foreground">Our Vision</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
                 To create the leading platform where African creators, students, and dreamers can discover content, earn
-                meaningful income, and build lasting influence - all while staying true to their authentic selves and
+                meaningful income, and build lasting influence. All while staying true to their authentic selves and
                 connecting with audiences that genuinely care about their work.
               </p>
             </section>

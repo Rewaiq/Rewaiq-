@@ -17,7 +17,7 @@ export function ForCreators() {
           </h2>
 
           <p className="text-white/60 max-w-3xl mx-auto text-lg">
-            Rewaiq helps creators and brands reach real African users, not bots — and turn engagement into measurable results.
+            Rewaiq helps creators and brands reach real African users, not bots  and turn engagement into measurable results.
           </p>
         </div>
 

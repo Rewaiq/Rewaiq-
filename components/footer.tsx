@@ -102,6 +102,9 @@ export function Footer() {
               <Link href="/blog" className="text-sm text-white/60 hover:text-white transition-colors">
                 Blog
               </Link>
+              <Link href="/admin" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            Admin Login
+          </Link>
             </div>
           </div>
 

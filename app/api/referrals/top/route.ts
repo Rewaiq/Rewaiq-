@@ -1,26 +1,40 @@
 import { NextResponse } from "next/server"
 import sql from "@/lib/db"
 
+export const dynamic = "force-dynamic" // ✅ disables static caching
+export const revalidate = 0
+
 export async function GET() {
   try {
-    // Top 10 inviters = people whose referral_code was used by others (referred_by)
     const rows = await sql`
       SELECT
-        w.referral_code AS code,
-        w.full_name AS name,
-        COALESCE(COUNT(r.id), 0)::int AS invites
+        w.referral_code AS "referralCode",
+        COALESCE(NULLIF(w.full_name, ''), 'Anonymous') AS "fullName",
+        COUNT(c.id)::int AS "invites"
       FROM public.waitlist w
-      LEFT JOIN public.waitlist r
-        ON r.referred_by = w.referral_code
+      JOIN public.waitlist c
+        ON c.referred_by = w.referral_code
       WHERE w.referral_code IS NOT NULL
+        AND w.referral_code <> ''
       GROUP BY w.referral_code, w.full_name
-      ORDER BY invites DESC, MAX(w.created_at) DESC
-      LIMIT 10
+      ORDER BY COUNT(c.id) DESC, MIN(w.created_at) ASC
+      LIMIT 5;
     `
 
-    return NextResponse.json({ leaders: rows }, { status: 200 })
-  } catch (err) {
+    return NextResponse.json(
+      { ok: true, top: rows },
+      {
+        status: 200,
+        headers: {
+          "Cache-Control": "no-store, max-age=0",
+        },
+      }
+    )
+  } catch (err: any) {
     console.error("Top referrals error:", err)
-    return NextResponse.json({ leaders: [], error: "Server error" }, { status: 500 })
+    return NextResponse.json(
+      { ok: false, error: "Server error", code: err?.code || "UNKNOWN" },
+      { status: 500 }
+    )
   }
 }

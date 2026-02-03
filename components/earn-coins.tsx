@@ -59,7 +59,7 @@ export function EarnCoins() {
             Earn Coins, Convert to Cash
           </h2>
           <p className="text-white/60 max-w-3xl mx-auto text-base md:text-lg leading-relaxed">
-            Transparent rewards for verified actions — and coins you can withdraw or reinvest in your growth.
+            Transparent rewards for verified actions  and coins you can withdraw or reinvest in your growth.
           </p>
         </div>
 
@@ -93,7 +93,7 @@ export function EarnCoins() {
               Use Your Coins To
             </h3>
             <p className="text-white/60 text-center mb-8">
-              Grow faster on the platform — or cash out when you want.
+              Grow faster on the platform  or cash out when you want.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
@@ -122,7 +122,7 @@ export function EarnCoins() {
               </button>
 
               <p className="text-xs text-white/45 mt-3">
-                Rewards are tied to verified actions — no “get-rich-quick” claims.
+                Rewards are tied to verified actions, no “get-rich-quick” claims.
               </p>
             </div>
           </div>

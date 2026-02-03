@@ -2,64 +2,94 @@
 
 import { useEffect, useState } from "react"
 
-type Leader = {
-  code: string
-  name: string | null
-  invites: number
+type Row = {
+  referralCode: string
+  fullName: string
+  invites: number | string
 }
 
 export default function Leaderboard() {
-  const [leaders, setLeaders] = useState<Leader[]>([])
+  const [rows, setRows] = useState<Row[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    let mounted = true
+
     async function load() {
       try {
         const res = await fetch("/api/referrals/top", { cache: "no-store" })
         const data = await res.json()
-        setLeaders(Array.isArray(data?.leaders) ? data.leaders : [])
+        if (!mounted) return
+
+        if (res.ok && data?.top) {
+          setRows(
+            (data.top as Row[]).map((r) => ({
+              ...r,
+              invites: Number(r.invites || 0),
+            }))
+          )
+        } else {
+          setRows([])
+        }
       } catch {
-        setLeaders([])
+        if (mounted) setRows([])
       } finally {
-        setLoading(false)
+        if (mounted) setLoading(false)
       }
     }
+
     load()
+    return () => {
+      mounted = false
+    }
   }, [])
 
   return (
     <div className="max-w-xl mx-auto mt-10 p-[1px] rounded-2xl bg-gradient-to-r from-white/20 to-white/10">
-      <div className="rounded-2xl bg-black/25 border border-white/10 p-5 text-left">
-        <h3 className="text-white font-semibold mb-3">🏆 Top Referrals</h3>
+      <div className="rounded-2xl bg-black/25 border border-white/10 p-5">
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-white font-semibold">🏆 Top Referrers</p>
+          <p className="text-xs text-white/60">Top 5</p>
+        </div>
 
         {loading ? (
-          <p className="text-white/70 text-sm">Loading leaderboard…</p>
-        ) : leaders.length === 0 ? (
-          <p className="text-white/70 text-sm">No leaderboard data yet.</p>
+          <p className="text-sm text-white/70 mt-4">Loading leaderboard…</p>
+        ) : rows.length === 0 ? (
+          <p className="text-sm text-white/70 mt-4">
+            No referrals yet. Be the first to invite friends 😄
+          </p>
         ) : (
-          <ol className="space-y-2">
-            {leaders.map((l, idx) => (
-              <li
-                key={l.code}
-                className="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-3 py-2"
+          <div className="mt-4 grid gap-2">
+            {rows.map((r, idx) => (
+              <div
+                key={r.referralCode}
+                className="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3"
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-white/70 text-sm w-6">{idx + 1}.</span>
+                  <div className="w-8 h-8 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-sm text-white/85">
+                    {idx + 1}
+                  </div>
                   <div>
-                    <p className="text-white text-sm font-medium">
-                      {l.name || "Anonymous"}
+                    <p className="text-sm text-white font-medium">
+                      {r.fullName || "Anonymous"}
                     </p>
-                    <p className="text-white/60 text-xs">Code: {l.code}</p>
+                    <p className="text-xs text-white/60">
+                      Code: <span className="text-white/80">{r.referralCode}</span>
+                    </p>
                   </div>
                 </div>
-                <span className="text-white font-semibold text-sm">{l.invites}</span>
-              </li>
+
+                <div className="text-right">
+                  <p className="text-sm text-white font-semibold">{Number(r.invites)}</p>
+                  <p className="text-xs text-white/60">invites</p>
+                </div>
+              </div>
             ))}
-          </ol>
+          </div>
         )}
 
-        <p className="text-white/55 text-xs mt-3">
-          Tip: Share your referral link to climb the leaderboard.
+        <p className="text-xs text-white/60 mt-4">
+          Tip: Share your referral link on WhatsApp groups to climb the leaderboard 🚀
         </p>
       </div>
     </div>

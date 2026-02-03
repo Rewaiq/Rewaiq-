@@ -23,7 +23,7 @@ export function WhoWeAre() {
     {
       icon: Lightbulb,
       title: "Progress",
-      description: "We reward consistency and real digital participation — not hype.",
+      description: "We reward consistency and real digital participation, Not hype.",
     },
     {
       icon: Eye,
@@ -52,7 +52,7 @@ export function WhoWeAre() {
             >
               Get Early Access
             </Button>
-            <span className="text-xs text-white/50">Join the waitlist — no hype, just clarity.</span>
+            <span className="text-xs text-white/50">Join the waitlist. No hype, just clarity.</span>
           </div>
         </div>
 
@@ -65,7 +65,7 @@ export function WhoWeAre() {
                 <h3 className="text-xl font-bold text-white">Vision</h3>
               </div>
               <p className="text-white/70 leading-relaxed">
-                Build Africa’s most trusted engagement-to-earn ecosystem — where participation creates value and young
+                Build Africa’s most trusted engagement-to-earn ecosystem, where participation creates value and young
                 people can discover, engage, and earn sustainably.
               </p>
             </div>
@@ -78,7 +78,7 @@ export function WhoWeAre() {
                 <h3 className="text-xl font-bold text-white">Mission</h3>
               </div>
               <p className="text-white/70 leading-relaxed">
-                Connect creators and brands to real users through structured campaigns and tasks — rewarding verified
+                Connect creators and brands to real users through structured campaigns and tasks. Rewarding verified
                 engagement, supporting creator growth, and building digital skills through our Tech Hub.
               </p>
             </div>

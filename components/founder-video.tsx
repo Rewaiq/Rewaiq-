@@ -46,7 +46,7 @@ export function FounderVideo() {
                 Ubani Solomon Ikedi
               </p>
               <p className="text-sm text-muted-foreground">
-                Founder, Rewaiq Technologies Ltd
+                Founder, Rewaiq Technologies Ltd  <b>(RC 9137882)</b>
               </p>
             </div>
           </div>
@@ -59,10 +59,6 @@ export function FounderVideo() {
             >
               View LinkedIn
             </Link>
-
-            <Button onClick={scrollToWaitlist} className="rounded-full">
-              Join Waitlist
-            </Button>
           </div>
         </div>
 

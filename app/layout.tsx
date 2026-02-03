@@ -9,10 +9,10 @@ const _playfair = Playfair_Display({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://rewaiq.com.ng"),
-  title: {
-    default: "Rewaiq - Africa's #1 Digital Earning Platform | How to Make Money Online",
-    template: "%s | Rewaiq - Discover. Earn. Influence.",
-  },
+title: {
+  default: "Rewaiq - Africa's #1 Digital Earning Platform | How to Make Money Online",
+  template: "%s | Rewaiq - Discover. Earn. Influence.",
+},
   description:
     "Learn how to make money online in Nigeria, Ghana, Kenya, and across Africa. Rewaiq is Africa's premier digital earning platform for streaming music, watching videos, and completing tasks. Subsidiary of Rewaiq Technologies Ltd. RC 9137882.",
   keywords: [
@@ -126,7 +126,6 @@ export const metadata: Metadata = {
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "black-translucent",
   },
-  generator: 'v0.app'
 }
 
 export default function RootLayout({

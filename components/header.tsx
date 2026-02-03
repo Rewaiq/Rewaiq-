@@ -70,17 +70,17 @@ export function Header() {
           </Link>
 
           {/* IMPORTANT: Add Tech Hub link (clarify it’s support layer) */}
-          <Link href="#tech-hub" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-            Tech Hub
+          <Link href="/hub" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+           Rewaiq Hub
           </Link>
 
-          <Link href="#how-it-works" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          <Link href="/#how-it-works" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             How It Works
           </Link>
-          <Link href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          <Link href="/#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             Features
           </Link>
-          <Link href="#faq" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          <Link href="/#faq" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             FAQ
           </Link>
           <Link href="/videos" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
