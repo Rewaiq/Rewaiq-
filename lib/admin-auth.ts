@@ -1,35 +1,78 @@
+import { cookies } from "next/headers"
 import crypto from "crypto"
 
-const SECRET = process.env.ADMIN_SECRET || "dev_secret_change_me"
+const COOKIE_NAME = "rewaiq_admin"
 
-export function signAdminToken(payload: { email: string; exp: number }) {
-  const body = Buffer.from(JSON.stringify(payload)).toString("base64url")
-  const sig = crypto.createHmac("sha256", SECRET).update(body).digest("base64url")
-  return `${body}.${sig}`
+/**
+ * Create a signed token for admin sessions
+ */
+export function signAdminToken(payload: { email: string; ts: number }) {
+  const secret = process.env.ADMIN_SECRET
+  if (!secret) throw new Error("ADMIN_SECRET is missing")
+
+  const data = JSON.stringify(payload)
+  const b64 = Buffer.from(data).toString("base64url")
+
+  const sig = crypto.createHmac("sha256", secret).update(b64).digest("base64url")
+  return `${b64}.${sig}`
 }
 
-export function verifyAdminToken(token: string) {
-  const [body, sig] = token.split(".")
-  if (!body || !sig) return null
+/**
+ * Verify a signed admin token string
+ */
+export function verifyAdminToken(token: string | null): { email: string; ts: number } | null {
+  if (!token) return null
 
-  const expected = crypto.createHmac("sha256", SECRET).update(body).digest("base64url")
-  if (expected !== sig) return null
+  const secret = process.env.ADMIN_SECRET
+  if (!secret) return null
 
-  const payload = JSON.parse(Buffer.from(body, "base64url").toString("utf8")) as {
-    email: string
-    exp: number
+  const [b64, sig] = token.split(".")
+  if (!b64 || !sig) return null
+
+  const expectedSig = crypto.createHmac("sha256", secret).update(b64).digest("base64url")
+  if (sig !== expectedSig) return null
+
+  try {
+    const json = Buffer.from(b64, "base64url").toString("utf8")
+    const payload = JSON.parse(json) as { email: string; ts: number }
+    if (!payload?.email || !payload?.ts) return null
+    return payload
+  } catch {
+    return null
   }
-
-  if (!payload?.email || !payload?.exp) return null
-  if (Date.now() > payload.exp) return null
-
-  return payload
 }
 
-export function getAllowlist() {
-  const raw = process.env.ADMIN_ALLOWLIST || ""
-  return raw
+/**
+ * Read token from cookies (server-side)
+ */
+export function getAdminFromCookie(): { email: string; ts: number } | null {
+  const token = cookies().get(COOKIE_NAME)?.value || null
+  return verifyAdminToken(token)
+}
+
+/**
+ * Allowlist check
+ */
+export function isAllowlistedEmail(email: string) {
+  const list = (process.env.ADMIN_ALLOWLIST || "")
     .split(",")
     .map((s) => s.trim().toLowerCase())
     .filter(Boolean)
+
+  return list.includes(email.toLowerCase())
 }
+
+/**
+ * ✅ This is what your build is complaining is missing.
+ * Use this inside any /api/admin/* route.
+ */
+export function assertAdminOrThrow() {
+  const admin = getAdminFromCookie()
+  if (!admin) throw new Error("UNAUTHORIZED")
+
+  if (!isAllowlistedEmail(admin.email)) throw new Error("FORBIDDEN")
+
+  return admin
+}
+
+export const ADMIN_COOKIE_NAME = COOKIE_NAME
