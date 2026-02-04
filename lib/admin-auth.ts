@@ -1,7 +1,25 @@
 import { cookies } from "next/headers"
 import crypto from "crypto"
 
-const COOKIE_NAME = "rewaiq_admin"
+export const ADMIN_COOKIE_NAME = "rewaiq_admin"
+
+/**
+ * Read and normalize allowlist from env
+ */
+export function getAllowlist(): string[] {
+  return (process.env.ADMIN_ALLOWLIST || "")
+    .split(",")
+    .map((s) => s.trim().toLowerCase())
+    .filter(Boolean)
+}
+
+/**
+ * Allowlist check
+ */
+export function isAllowlistedEmail(email: string) {
+  const list = getAllowlist()
+  return list.includes(email.trim().toLowerCase())
+}
 
 /**
  * Create a signed token for admin sessions
@@ -45,34 +63,20 @@ export function verifyAdminToken(token: string | null): { email: string; ts: num
 /**
  * Read token from cookies (server-side)
  */
-export function getAdminFromCookie(): { email: string; ts: number } | null {
-  const token = cookies().get(COOKIE_NAME)?.value || null
+export async function getAdminFromCookie(): Promise<{ email: string; ts: number } | null> {
+  const cookieStore = await cookies()
+  const token = cookieStore.get(ADMIN_COOKIE_NAME)?.value || null
   return verifyAdminToken(token)
 }
 
 /**
- * Allowlist check
- */
-export function isAllowlistedEmail(email: string) {
-  const list = (process.env.ADMIN_ALLOWLIST || "")
-    .split(",")
-    .map((s) => s.trim().toLowerCase())
-    .filter(Boolean)
-
-  return list.includes(email.toLowerCase())
-}
-
-/**
- * ✅ This is what your build is complaining is missing.
  * Use this inside any /api/admin/* route.
  */
-export function assertAdminOrThrow() {
-  const admin = getAdminFromCookie()
+export async function assertAdminOrThrow() {
+  const admin = await getAdminFromCookie()
   if (!admin) throw new Error("UNAUTHORIZED")
 
   if (!isAllowlistedEmail(admin.email)) throw new Error("FORBIDDEN")
 
   return admin
 }
-
-export const ADMIN_COOKIE_NAME = COOKIE_NAME
