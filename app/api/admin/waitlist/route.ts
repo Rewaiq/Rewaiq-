@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server"
 import sql from "@/lib/db"
+export const dynamic = "force-dynamic"
+export const revalidate = 0
+
 
 function toInt(v: string | null, fallback: number) {
   const n = Number(v)
@@ -17,7 +20,7 @@ export async function GET(req: Request) {
     const like = `%${q}%`
 
     // total count
-    const totalRes = await sql<{ total: number }[]>`
+    const totalRes = (await sql`
       SELECT COUNT(*)::int as total
       FROM public.waitlist
       WHERE
@@ -28,24 +31,12 @@ export async function GET(req: Request) {
         referral_code ILIKE ${like} OR
         referred_by ILIKE ${like} OR
         country ILIKE ${like}
-    `
+    `) as { total: number }[]
 
     const total = totalRes?.[0]?.total ?? 0
 
     // rows
-    const rows = await sql<
-      {
-        id: string
-        full_name: string | null
-        email: string | null
-        phone: string | null
-        country: string | null
-        heard_from: string | null
-        referral_code: string | null
-        referred_by: string | null
-        created_at: string | null
-      }[]
-    >`
+    const rows = (await sql`
       SELECT
         id,
         full_name,
@@ -67,23 +58,38 @@ export async function GET(req: Request) {
         country ILIKE ${like}
       ORDER BY created_at DESC NULLS LAST
       LIMIT ${pageSize} OFFSET ${offset}
-    `
+    `) as {
+        id: string
+        full_name: string | null
+        email: string | null
+        phone: string | null
+        country: string | null
+        heard_from: string | null
+        referral_code: string | null
+        referred_by: string | null
+        created_at: string | null
+      }[]
 
-    return NextResponse.json(
-      {
-        ok: true,
-        page,
-        pageSize,
-        total,
-        pages: Math.max(1, Math.ceil(total / pageSize)),
-        rows,
-      },
-      { status: 200 }
-    )
-  } catch (err: any) {
+    const rawBase = (process.env.NEXT_PUBLIC_SITE_URL || "https://rewaiq.com.ng").trim()
+
+// ensure it starts with http(s)
+const base =
+  /^https?:\/\//i.test(rawBase) ? rawBase : `https://${rawBase.replace(/^\/+/, "")}`
+
+return NextResponse.json(
+  {
+    ok: true,
+    waitlist: rows,
+    total,
+    page,
+    pageSize,
+  },
+  { status: 200 }
+)
+  } catch (err) {
     console.error("Admin waitlist error:", err)
     return NextResponse.json(
-      { ok: false, error: "Server error", code: err?.code || "UNKNOWN" },
+      { ok: false, error: "Server error", code: (err as any)?.code || "UNKNOWN" },
       { status: 500 }
     )
   }
