@@ -1,149 +1,192 @@
-"use client"
+﻿"use client";
 
-import { Button } from "@/components/ui/button"
-import { useMemo, useState } from "react"
+import React from "react";
+import Link from "next/link";
+import { ArrowRight, Compass, CheckCircle2, Wifi, Battery, ListCheck, Music, Play, MapPin } from "lucide-react";
 
-export function Hero() {
-  const [copied, setCopied] = useState(false)
-
-  const scrollToWaitlist = () => {
-    const waitlistSection = document.getElementById("waitlist")
-    waitlistSection?.scrollIntoView({ behavior: "smooth" })
-  }
-
-  // Optional: basic share link (no backend). You can later replace with real referral links.
-  const shareLink = useMemo(() => {
-    if (typeof window === "undefined") return "https://rewaiq.com.ng"
-    return window.location.origin
-  }, [])
-
-  const handleCopyLink = async () => {
-    try {
-      await navigator.clipboard.writeText(shareLink)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 1500)
-    } catch {
-      // silent fail
-    }
-  }
-
+export default function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-10 px-6 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a1a] via-[#0f0f2a] to-[#1a1040] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[#2a1060]/40 to-transparent pointer-events-none" />
+    <section className="relative bg-white dark:bg-[#0A1B3C] pt-12 md:pt-20 pb-20 md:pb-28 overflow-hidden border-b border-slate-100 dark:border-white/10 transition-colors">
+      <div className="absolute -top-40 right-0 w-[600px] h-[600px] bg-[#D9A93A]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 -left-40 w-[500px] h-[500px] bg-[#0A1B3C]/5 dark:bg-[#0F2657]/40 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Soft glows */}
-      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full bg-[#4F7FFF]/10 blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-64 right-[-200px] w-[700px] h-[700px] rounded-full bg-[#8B5CF6]/10 blur-3xl pointer-events-none" />
-
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
-        {/* Badge */}
-        <div className="inline-flex items-center px-5 py-2.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm mb-8">
-          <span className="text-sm text-white/80">
-            Online platform • Supported by a physical Tech Hub
-          </span>
-        </div>
-
-        {/* Headline */}
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-5">
-          Discover.
-          <span className="block bg-gradient-to-r from-[#4F7FFF] via-[#6B8FFF] to-[#8B5CF6] bg-clip-text text-transparent">
-            Engage. Earn.
-          </span>
-        </h1>
-
-        {/* Subtext */}
-        <p className="text-base md:text-lg text-white/70 max-w-2xl mx-auto mb-8 leading-relaxed">
-          Rewaiq connects African youth, creators, and brands through verified digital engagement. Turning
-          discovery into rewards you can redeem or reinvest.
-        </p>
-
-        {/* 3-step micro explainer */}
-        <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4 mb-8">
-          <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/80 text-sm">
-            1) Discover campaigns
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        {/* Left Column */}
+        <div className="lg:col-span-7 flex flex-col items-start z-10">
+          
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#0A1B3C] dark:bg-white/10 text-white dark:text-[#F0C860] text-xs md:text-sm font-extrabold tracking-widest uppercase mb-6 shadow-sm border border-[#D9A93A]/30">
+            <span className="w-2 h-2 rounded-full bg-[#D9A93A]" />
+            <span>DISCOVER • EARN • INFLUENCE</span>
           </div>
-          <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/80 text-sm">
-            2) Engage (music, video, brands)
-          </div>
-          <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/80 text-sm">
-            3) Earn coins → redeem/reinvest
-          </div>
-        </div>
 
-        {/* Hub clarification */}
-        <p className="text-sm text-white/55 max-w-2xl mx-auto mb-8">
-          The Rewaiq Tech Hub supports onboarding, access, and skills training (web development, design,
-          digital marketing, etc.). But earning happens on the platform.
-        </p>
+          <h1 className="text-4xl sm:text-5xl lg:text-[62px] leading-[1.08] font-extrabold text-[#0A1B3C] dark:text-white tracking-tight mb-6 uppercase">
+            Talent is everywhere. <br className="hidden sm:inline" />
+            <span className="relative inline-block text-[#0F2657] dark:text-[#F0C860]">
+              Opportunity is not.
+              <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#D9A93A]" viewBox="0 0 300 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2.5 9.5C80 2.5 220 2 297.5 8" stroke="currentColor" strokeWidth="4" strokeLinecap="round"/>
+              </svg>
+            </span>
+          </h1>
 
-        {/* CTA row */}
-        <div className="flex flex-col items-center gap-4">
-          <Button
-            size="lg"
-            className="bg-[#3b5bdb] hover:bg-[#364fc7] text-white rounded-full px-12 py-7 text-lg font-medium shadow-xl shadow-blue-500/20 transition-all hover:scale-105 animate-[pulse_2.4s_ease-in-out_infinite]"
-            onClick={scrollToWaitlist}
-          >
-            Join Waitlist
-          </Button>
-
-          <p className="text-xs text-white/45">
-            No “get-rich-quick” promises. Clear rules, verified engagement, transparent rewards.
+          <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl mb-8 font-normal">
+            Rewaiq connects young people, creators, students and brands to opportunities to discover, participate, earn and grow.
           </p>
-        </div>
 
-        {/* Referral / viral loop (UI only — wire later) */}
-        <div className="mt-10 max-w-2xl mx-auto">
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-5 md:p-6 text-left">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#4F7FFF]/10 via-transparent to-[#8B5CF6]/10 pointer-events-none" />
-            <div className="relative">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div>
-                  <p className="text-white font-semibold">Get early access faster</p>
-                  <p className="text-white/65 text-sm mt-1">
-                    Invite <span className="text-white">5 friends</span> to join the waitlist and unlock a priority badge
-                    at launch.
-                  </p>
-                </div>
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto mb-6">
+            <a
+              href="https://app.rewaiq.com.ng"
+              className="inline-flex items-center justify-center gap-3 bg-[#D9A93A] hover:bg-[#c4952e] text-[#0A1B3C] font-extrabold uppercase tracking-wider text-sm px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
+            >
+              <span>Join Rewaiq</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
 
-                <div className="flex items-center gap-3">
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    className="rounded-full bg-white/10 hover:bg-white/15 text-white border border-white/10"
-                    onClick={handleCopyLink}
-                  >
-                    {copied ? "Copied ✅" : "Copy invite link"}
-                  </Button>
-                  <Button
-                    type="button"
-                    className="rounded-full bg-white/10 hover:bg-white/15 text-white border border-white/10"
-                    onClick={() => {
-                      const text = `Rewaiq waitlist is live. Join here: ${shareLink}`
-                      const url = `https://wa.me/?text=${encodeURIComponent(text)}`
-                      window.open(url, "_blank", "noopener,noreferrer")
-                    }}
-                  >
-                    Share on WhatsApp
-                  </Button>
-                </div>
-              </div>
+            <Link
+              href="#pathways"
+              className="inline-flex items-center justify-center gap-2.5 bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 border border-slate-300 dark:border-white/20 text-[#0A1B3C] dark:text-white font-extrabold uppercase tracking-wider text-sm px-7 py-4 rounded-xl transition-all"
+            >
+              <Compass className="w-4 h-4 text-[#D9A93A]" />
+              <span>Explore Opportunities</span>
+            </Link>
+          </div>
 
-              <div className="mt-4 flex flex-wrap gap-2">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <span
-                    key={i}
-                    className="text-xs text-white/70 px-3 py-1 rounded-full border border-white/10 bg-white/5"
-                  >
-                    Invite {i + 1}
-                  </span>
-                ))}
-              </div>
+          <div className="flex items-center gap-3 text-xs md:text-sm text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wide">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <span>Built for young people. Built around opportunity.</span>
+          </div>
+
+          {/* 3 Metric Pills */}
+          <div className="mt-10 pt-8 border-t border-slate-200 dark:border-white/10 grid grid-cols-3 gap-6 w-full max-w-lg">
+            <div>
+              <p className="font-extrabold text-2xl text-[#0A1B3C] dark:text-white font-mono">Digital</p>
+              <p className="text-xs uppercase font-bold tracking-wider text-slate-500 dark:text-slate-400 mt-0.5">Core Web & Mobile</p>
+            </div>
+            <div>
+              <p className="font-extrabold text-2xl text-[#D9A93A] font-mono">Tasks & Coins</p>
+              <p className="text-xs uppercase font-bold tracking-wider text-slate-500 dark:text-slate-400 mt-0.5">Earn from activity</p>
+            </div>
+            <div>
+              <p className="font-extrabold text-2xl text-[#0A1B3C] dark:text-white font-mono">Aba Hub</p>
+              <p className="text-xs uppercase font-bold tracking-wider text-slate-500 dark:text-slate-400 mt-0.5">Physical learning layer</p>
             </div>
           </div>
+
         </div>
+
+        {/* Right Column: Mobile App Preview Frame */}
+        <div className="lg:col-span-5 relative">
+          <div className="absolute -inset-4 bg-gradient-to-tr from-[#0F2657]/20 to-[#D9A93A]/20 rounded-3xl blur-2xl" />
+
+          <div className="relative bg-[#0A1B3C] rounded-[32px] p-4 sm:p-5 shadow-2xl border-4 border-slate-800 text-white max-w-[440px] mx-auto">
+            
+            {/* Phone Top Bar */}
+            <div className="flex items-center justify-between px-3 py-2 mb-3 border-b border-slate-700/60 text-xs">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
+                <span className="font-mono text-slate-300 font-semibold">rewaiq.com.ng/app</span>
+              </div>
+              <div className="flex items-center gap-2 text-slate-400">
+                <span className="text-[10px] font-mono text-[#D9A93A] bg-[#D9A93A]/15 px-1.5 py-0.5 rounded font-bold">BETA</span>
+                <Wifi className="w-3 h-3" />
+                <Battery className="w-3 h-3" />
+              </div>
+            </div>
+
+            {/* User Profile Card */}
+            <div className="bg-gradient-to-r from-[#0F2657] to-[#163a7a] p-4 rounded-2xl border border-[#D9A93A]/30 mb-4 shadow-sm">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-full bg-[#D9A93A]/20 border border-[#D9A93A] flex items-center justify-center text-[#F0C860] font-bold text-sm">
+                    AO
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-white leading-tight">Amaka Okoro</h4>
+                    <p className="text-[10px] text-[#F0C860]">Creator & Student • FUTO</p>
+                  </div>
+                </div>
+                <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30 font-mono">Active</span>
+              </div>
+
+              {/* Wallet Card */}
+              <div className="bg-[#0A1B3C]/80 rounded-xl p-2.5 flex items-center justify-between mt-2 border border-slate-700">
+                <div>
+                  <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Rewaiq Wallet</span>
+                  <span className="text-lg font-extrabold text-[#F0C860] font-mono">14,850 <span className="text-xs font-normal text-white">Coins</span></span>
+                </div>
+                <div className="text-right">
+                  <span className="text-[10px] text-emerald-400 font-semibold block">+₦14,850 value</span>
+                  <span className="text-[9px] text-slate-400">Direct withdrawal</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Task Item */}
+            <div className="bg-slate-900/90 rounded-2xl p-3 border border-slate-800 mb-3">
+              <div className="flex items-center justify-between text-[11px] mb-1.5">
+                <span className="text-slate-300 font-semibold flex items-center gap-1.5">
+                  <ListCheck className="w-3.5 h-3.5 text-[#D9A93A]" />
+                  Verified Brand Task
+                </span>
+                <span className="text-[10px] text-emerald-400 font-mono font-bold">+500 Coins</span>
+              </div>
+              <div className="flex items-center justify-between text-xs">
+                <div>
+                  <p className="font-bold text-slate-100">Fintech User Experience Review</p>
+                  <p className="text-[10px] text-slate-400">Open to Students • 6 mins</p>
+                </div>
+                <button className="bg-[#D9A93A] text-[#0A1B3C] font-bold text-[10px] px-3 py-1.5 rounded-lg">
+                  Participate
+                </button>
+              </div>
+            </div>
+
+            {/* Stream Campaign */}
+            <div className="bg-slate-900/90 rounded-2xl p-3 border border-slate-800 mb-3">
+              <div className="flex items-center justify-between text-[11px] mb-2">
+                <span className="text-[#F0C860] font-bold flex items-center gap-1.5">
+                  <Music className="w-3.5 h-3.5 text-[#D9A93A]" />
+                  Stream-to-Earn Campaign
+                </span>
+                <span className="text-[10px] bg-[#D9A93A]/20 text-[#F0C860] px-2 py-0.5 rounded font-mono">+120 Coins/play</span>
+              </div>
+              <div className="flex items-center gap-3 bg-slate-800/80 p-2 rounded-xl">
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-indigo-700 to-[#0A1B3C] flex items-center justify-center text-white text-xs font-bold">
+                  <Play className="w-3.5 h-3.5 fill-white" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-bold text-white truncate">Ogene Vibes EP — Premiere</p>
+                  <p className="text-[10px] text-slate-400">Chidi Blaze</p>
+                </div>
+                <span className="text-[10px] text-emerald-400 font-mono font-bold">Live</span>
+              </div>
+            </div>
+
+            {/* Hub Session */}
+            <div className="bg-slate-900/90 rounded-2xl p-3 border border-slate-800 flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-amber-500/20 text-[#D9A93A] flex items-center justify-center text-xs">
+                  <MapPin className="w-4 h-4" />
+                </div>
+                <div>
+                  <p className="text-[11px] font-bold text-white">Aba Innovation Hub Session</p>
+                  <p className="text-[9px] text-slate-400">Web & Tech Track Workshop</p>
+                </div>
+              </div>
+              <span className="text-[10px] font-bold text-[#F0C860] border border-[#D9A93A]/40 px-2 py-0.5 rounded">Registered</span>
+            </div>
+
+            {/* Bottom Activity Ticker */}
+            <div className="mt-3 text-center text-[10px] text-slate-400 flex items-center justify-center gap-2 pt-2 border-t border-slate-800">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <span>Emeka J. just unlocked <strong>500 referral coins</strong></span>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </section>
-  )
+  );
 }
