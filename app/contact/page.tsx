@@ -1,114 +1,119 @@
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { GlitterBackground } from "@/components/glitter-background"
-import Link from "next/link"
+﻿"use client";
+
+import React, { useState } from "react";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import { Mail, MapPin, Phone, Send, CheckCircle2 } from "lucide-react";
 
 export default function ContactPage() {
+  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const mailto = `mailto:info@rewaiq.com.ng?subject=${encodeURIComponent("Contact Inquiry: " + formData.name)}&body=${encodeURIComponent(formData.message + "\n\nFrom: " + formData.email)}`;
+    window.location.href = mailto;
+    setSubmitted(true);
+  };
+
   return (
-    <main className="min-h-screen bg-background">
-      <GlitterBackground />
+    <main className="min-h-screen flex flex-col bg-white dark:bg-[#0A1B3C] text-slate-800 dark:text-white transition-colors">
       <Header />
 
-      <div className="pt-32 pb-20 px-6 relative z-10">
-        <div className="container mx-auto max-w-4xl">
-          <h1 className="text-5xl md:text-6xl font-bold text-center mb-6 bg-gradient-to-r from-[#4F7FFF] to-[#8B5CF6] bg-clip-text text-transparent">
-            Contact Rewaiq
-          </h1>
+      <section className="py-20 lg:py-28 border-b border-[#E2E8F0] dark:border-white/10">
+        <div className="mx-auto max-w-7xl px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+          
+          <div className="lg:col-span-5">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#D9A93A] font-mono">GET IN TOUCH</span>
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0A1B3C] dark:text-white mt-2 mb-6 uppercase">
+              Contact Rewaiq
+            </h1>
+            <p className="text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-8">
+              Have questions about our programs, tasks, campaigns, or the physical hub in Aba? We'd love to hear from you.
+            </p>
 
-          <p className="text-xl text-muted-foreground text-center mb-16">
-            Hub location + online support channels.
-          </p>
-
-          <div className="space-y-12">
-            <section>
-              <h2 className="text-3xl font-bold mb-4 text-foreground">Rewaiq Hub</h2>
-              <div className="p-6 rounded-xl bg-card border border-border">
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  📍 <b className="text-foreground">Yellow Avenue</b> — Rewaiq Technologies Ltd (RC: 9137882)
-                </p>
-                <p className="text-muted-foreground mt-3">
-                  Rewaiq Hub is part of the Rewaiq ecosystem — a workspace for learning, collaboration, and real-world
-                  projects (online & offline).
-                </p>
-
-                <div className="flex flex-wrap gap-3 mt-6">
-                  <Link
-                    className="bg-gradient-to-r from-[#4F7FFF] to-[#3b5bdb] hover:opacity-90 text-white rounded-full px-8 py-3 font-medium shadow-lg shadow-primary/20"
-                    href="/hub"
-                  >
-                    Visit Hub Page
-                  </Link>
-                  <a
-                    className="border border-border bg-transparent hover:bg-muted text-foreground rounded-full px-8 py-3 font-medium"
-                    href="https://wa.me/2348062370534"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    WhatsApp Us
-                  </a>
+            <div className="space-y-4 text-sm">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#FAF4E3] dark:bg-white/10 flex items-center justify-center text-[#D9A93A]">
+                  <Mail className="w-5 h-5" />
                 </div>
-              </div>
-            </section>
-
-            <section>
-              <h2 className="text-3xl font-bold mb-4 text-foreground">Online Support</h2>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="p-6 rounded-xl bg-card border border-border">
-                  <h3 className="text-xl font-semibold mb-2 text-foreground">Phone</h3>
-                  <p className="text-muted-foreground mb-4">Call or message us directly.</p>
-                  <a className="underline underline-offset-4 text-foreground" href="tel:08062370534">
-                    08062370534
-                  </a>
-                </div>
-
-                <div className="p-6 rounded-xl bg-card border border-border">
-                  <h3 className="text-xl font-semibold mb-2 text-foreground">Email</h3>
-                  <p className="text-muted-foreground mb-4">For formal inquiries or support.</p>
-                  <a className="underline underline-offset-4 text-foreground" href="mailto:support@rewaiq.com.ng">
-                    support@rewaiq.com.ng
-                  </a>
+                <div>
+                  <span className="text-xs text-slate-500 block">General Inquiries</span>
+                  <a href="mailto:info@rewaiq.com.ng" className="font-semibold hover:text-[#D9A93A]">info@rewaiq.com.ng</a>
                 </div>
               </div>
 
-              <p className="text-sm text-muted-foreground mt-6">
-                Please don’t share sensitive data (passwords, OTPs) through email/WhatsApp.
-              </p>
-            </section>
-
-            <section className="pt-12">
-              <div className="bg-gradient-to-br from-[#4F7FFF]/10 to-[#8B5CF6]/10 border border-[#4F7FFF]/20 rounded-2xl p-8 text-center">
-                <h2 className="text-2xl font-bold mb-4 text-foreground">Join the movement</h2>
-                <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                  Want early access? Join our waitlist to get notified when you’re eligible.
-                </p>
-
-                <div className="flex flex-wrap justify-center gap-3">
-                  <Link
-                    className="bg-gradient-to-r from-[#4F7FFF] to-[#3b5bdb] hover:opacity-90 text-white rounded-full px-8 py-3 font-medium shadow-lg shadow-primary/20"
-                    href="/#waitlist"
-                  >
-                    Join Waitlist
-                  </Link>
-
-                  <Link
-                    className="border border-border bg-transparent hover:bg-muted text-foreground rounded-full px-8 py-3 font-medium"
-                    href="/about"
-                  >
-                    Learn More About Rewaiq
-                  </Link>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#FAF4E3] dark:bg-white/10 flex items-center justify-center text-[#D9A93A]">
+                  <MapPin className="w-5 h-5" />
                 </div>
-
-                <p className="mt-4 text-xs text-muted-foreground">
-                  Rewaiq Technologies Ltd (RC: 9137882)
-                </p>
+                <div>
+                  <span className="text-xs text-slate-500 block">Hub Facility</span>
+                  <span className="font-semibold">1 Yellow Avenue, Aba, Abia State</span>
+                </div>
               </div>
-            </section>
+            </div>
           </div>
+
+          <div className="lg:col-span-7">
+            <div className="rounded-3xl border border-[#E2E8F0] dark:border-white/10 bg-[#F8FAFC] dark:bg-[#0D204A] p-8 sm:p-10 shadow-lg">
+              {submitted ? (
+                <div className="py-8 text-center space-y-3">
+                  <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto" />
+                  <h3 className="text-xl font-bold text-[#0A1B3C] dark:text-white">Message Prepared!</h3>
+                  <p className="text-xs text-slate-600 dark:text-slate-300">Your email client has been opened to dispatch your message.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase text-slate-700 dark:text-slate-300 mb-1.5">Your Name *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Solomon Ikedi"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full rounded-xl border border-slate-300 dark:border-white/10 bg-white dark:bg-[#0A1B3C] px-4 py-3 text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-[#D9A93A] outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold uppercase text-slate-700 dark:text-slate-300 mb-1.5">Email Address *</label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="e.g. hello@example.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full rounded-xl border border-slate-300 dark:border-white/10 bg-white dark:bg-[#0A1B3C] px-4 py-3 text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-[#D9A93A] outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold uppercase text-slate-700 dark:text-slate-300 mb-1.5">Message *</label>
+                    <textarea
+                      rows={4}
+                      required
+                      placeholder="How can we help you?"
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      className="w-full rounded-xl border border-slate-300 dark:border-white/10 bg-white dark:bg-[#0A1B3C] px-4 py-3 text-sm text-slate-800 dark:text-white focus:ring-2 focus:ring-[#D9A93A] outline-none"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full rounded-xl bg-[#D9A93A] py-3.5 text-xs font-bold uppercase tracking-wider text-[#0A1B3C] hover:bg-[#F0C860] transition-colors flex items-center justify-center gap-2"
+                  >
+                    <span>Send Message</span>
+                    <Send className="w-4 h-4" />
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
+
         </div>
-      </div>
+      </section>
 
       <Footer />
     </main>
-  )
+  );
 }

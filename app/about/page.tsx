@@ -1,95 +1,63 @@
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { GlitterBackground } from "@/components/glitter-background"
-import { SupportWidget } from "@/components/support-widget"
+﻿import Header from "@/components/header";
+import Footer from "@/components/footer";
+import Link from "next/link";
+import { ArrowRight, CheckCircle2, Building2, Users, Rocket, ShieldCheck } from "lucide-react";
+
+export const metadata = {
+  title: "About Us | Rewaiq Technologies",
+  description: "Learn about Rewaiq Technologies Ltd, our mission to connect youth to opportunities, and our physical innovation hub in Aba.",
+};
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-background">
-      <GlitterBackground />
+    <main className="min-h-screen flex flex-col bg-white dark:bg-[#0A1B3C] text-slate-800 dark:text-white transition-colors">
       <Header />
-      <div className="pt-32 pb-20 px-6 relative z-10">
-        <div className="container mx-auto max-w-4xl">
-          <h1 className="text-5xl md:text-6xl font-bold text-center mb-6 bg-gradient-to-r from-[#4F7FFF] to-[#8B5CF6] bg-clip-text text-transparent">
-            About Rewaiq
-          </h1>
-          <p className="text-xl text-muted-foreground text-center mb-16">Discover. Earn. Influence.</p>
 
-          <div className="space-y-12">
-            <section>
-              <h2 className="text-3xl font-bold mb-4 text-foreground">Our Vision</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                To create the leading platform where African creators, students, and dreamers can discover content, earn
-                meaningful income, and build lasting influence. All while staying true to their authentic selves and
-                connecting with audiences that genuinely care about their work.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-3xl font-bold mb-4 text-foreground">Our Mission</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                We're creating Africa's Digital Earning Hub where engagement equals opportunity. Our mission is to
-                empower creators by providing a fair, transparent platform that rewards genuine interaction, celebrates
-                authentic creativity, and opens doors to financial freedom for every member of our community.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-3xl font-bold mb-4 text-foreground">Core Values</h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="p-6 rounded-xl bg-card border border-border">
-                  <h3 className="text-xl font-semibold mb-2 text-foreground">Empowerment</h3>
-                  <p className="text-muted-foreground">
-                    We believe in giving creators the tools and opportunities to build sustainable income streams
-                    through authentic engagement.
-                  </p>
-                </div>
-                <div className="p-6 rounded-xl bg-card border border-border">
-                  <h3 className="text-xl font-semibold mb-2 text-foreground">Authenticity</h3>
-                  <p className="text-muted-foreground">
-                    Real connections matter. We prioritize genuine interactions over vanity metrics and algorithmic
-                    noise.
-                  </p>
-                </div>
-                <div className="p-6 rounded-xl bg-card border border-border">
-                  <h3 className="text-xl font-semibold mb-2 text-foreground">Transparency</h3>
-                  <p className="text-muted-foreground">
-                    Clear earning structures, honest communication, and fair practices guide everything we do.
-                  </p>
-                </div>
-                <div className="p-6 rounded-xl bg-card border border-border">
-                  <h3 className="text-xl font-semibold mb-2 text-foreground">Community</h3>
-                  <p className="text-muted-foreground">
-                    Together we rise. We foster a supportive ecosystem where creators help each other succeed.
-                  </p>
-                </div>
-                <div className="p-6 rounded-xl bg-card border border-border md:col-span-2">
-                  <h3 className="text-xl font-semibold mb-2 text-foreground">Innovation</h3>
-                  <p className="text-muted-foreground">
-                    We continuously evolve our platform to meet the changing needs of African creators and the global
-                    creative economy.
-                  </p>
-                </div>
-              </div>
-            </section>
-
-            <section className="pt-12">
-              <div className="bg-gradient-to-br from-[#4F7FFF]/10 to-[#8B5CF6]/10 border border-[#4F7FFF]/20 rounded-2xl p-8 text-center">
-                <h2 className="text-2xl font-bold mb-4 text-foreground">Join Our Journey</h2>
-                <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                  We're building something special for Africa's creative community. Be part of the movement that's
-                  redefining how creators earn, grow, and succeed.
-                </p>
-                <button className="bg-gradient-to-r from-[#4F7FFF] to-[#3b5bdb] hover:from-[#4070ff] hover:to-[#364fc7] text-white rounded-full px-8 py-3 font-medium shadow-lg shadow-primary/20">
-                  Join the Waitlist
-                </button>
-              </div>
-            </section>
+      {/* Hero */}
+      <section className="py-20 lg:py-28 border-b border-[#E2E8F0] dark:border-white/10">
+        <div className="mx-auto max-w-7xl px-6 lg:px-12">
+          <div className="max-w-3xl">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#D9A93A]/30 bg-[#FAF4E3] dark:bg-[#D9A93A]/10 px-4 py-1.5 text-xs font-bold text-[#D9A93A] uppercase mb-4">
+              <Building2 className="w-4 h-4 text-[#D9A93A]" />
+              ABOUT REWAIQ TECHNOLOGIES
+            </span>
+            <h1 className="text-4xl sm:text-5xl font-extrabold uppercase text-[#0A1B3C] dark:text-white mb-6 leading-tight">
+              Talent is everywhere. <br />
+              <span className="text-[#D9A93A]">Opportunity is not.</span>
+            </h1>
+            <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-8">
+              Rewaiq Technologies Ltd (RC: 9137882) is a technology enterprise connecting young people, creators, students, and businesses across Nigeria to verified opportunities to discover, participate, earn, and grow.
+            </p>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Mission & Vision */}
+      <section className="py-20 bg-[#F8FAFC] dark:bg-[#0D204A]/40 border-b border-[#E2E8F0] dark:border-white/10">
+        <div className="mx-auto max-w-7xl px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="rounded-3xl border border-[#E2E8F0] dark:border-white/10 bg-white dark:bg-[#0D204A] p-8 shadow-sm">
+            <div className="w-12 h-12 rounded-xl bg-[#0A1B3C] text-[#D9A93A] flex items-center justify-center mb-4">
+              <Rocket className="w-6 h-6" />
+            </div>
+            <h2 className="text-2xl font-bold text-[#0A1B3C] dark:text-white mb-3">Our Mission</h2>
+            <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              To build accessible digital pathways and physical infrastructure that empower African youth with practical technology skills, verifiable tasks, and direct income opportunities.
+            </p>
+          </div>
+
+          <div className="rounded-3xl border border-[#E2E8F0] dark:border-white/10 bg-white dark:bg-[#0D204A] p-8 shadow-sm">
+            <div className="w-12 h-12 rounded-xl bg-[#0A1B3C] text-[#D9A93A] flex items-center justify-center mb-4">
+              <ShieldCheck className="w-6 h-6" />
+            </div>
+            <h2 className="text-2xl font-bold text-[#0A1B3C] dark:text-white mb-3">Institutional Trust</h2>
+            <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              Formally registered with the Corporate Affairs Commission (CAC), recognized under the Nigeria Startup Act with the NITDA Startup Label, and enrolled with SMEDAN.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <Footer />
-      <SupportWidget />
     </main>
-  )
+  );
 }

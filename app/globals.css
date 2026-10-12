@@ -11,7 +11,6 @@
   --color-gold: #D9A93A;
   --color-gold-light: #F0C860;
   --color-gold-hover: #C4962C;
-  --color-gold-subtle: rgba(217, 169, 58, 0.12);
 }
 
 :root {
@@ -22,6 +21,11 @@
 .dark {
   --background: #0A1B3C;
   --foreground: #FFFFFF;
+}
+
+html {
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 body {

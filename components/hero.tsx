@@ -1,5 +1,4 @@
 ﻿"use client";
-
 import React from "react";
 import Link from "next/link";
 import { ArrowRight, Compass, CheckCircle2, Wifi, Battery, ListCheck, Music, Play, MapPin } from "lucide-react";
