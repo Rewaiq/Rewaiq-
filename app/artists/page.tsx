@@ -32,7 +32,7 @@ export default function ArtistsPage() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href="https://app.rewaiq.com.ng"
+                href="https://app.rewaiq.com.ng/register?type=artist"
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#D9A93A] px-8 py-4 text-sm font-bold text-[#060F22] hover:bg-[#F0C860] transition-all"
               >
                 <span>Join Creator Roster</span>
